@@ -20,6 +20,7 @@ var() config array<int> IgnoreWave;
 var config bool bAffectBosses;
 var config bool bTeleportAffectBosses;
 var Invasion InvGame;
+var GameRules_MMutations Rules;
 
 var array<class<Mutation> > Mutations;
 var array<class<Monster> > ExcludedMonsters;
@@ -30,6 +31,11 @@ function PostBeginPlay()
     local int i;
     local class<Mutation> Mut;
     local class<Monster> M;
+
+    Rules = Spawn(class'GameRules_MMutations');
+
+    Rules.NextGameRules = Level.Game.GameRulesModifiers;
+    Level.Game.GameRulesModifiers = Rules;
 
     InvGame = Invasion(Level.Game);
 
@@ -174,6 +180,7 @@ defaultproperties
      MutationList(2)="Mutation_Teleport"
      MutationList(3)="Mutation_Health"
      MutationList(4)="Mutation_Speed"
+     MutationList(5)="Mutation_Shield"
      bCanInfectOtherMonsters=True
      bAllowMutationStacking=True
      InfectChance=0.200000
