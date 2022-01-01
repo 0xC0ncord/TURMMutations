@@ -27,5 +27,4 @@ simulated function ApplyMutation()
 
 defaultproperties
 {
-    MutationColor=MC_White
 }
